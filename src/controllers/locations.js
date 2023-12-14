@@ -42,12 +42,15 @@ const GET_LOCATIONS = async (req, res) => {
 
 const GET_LOCATION_RANDOM = async (req, res) => {
     try {
-        const numberOfLocations = 3; // Default to 1 if the number is not provided
+        // Fetch all locations and await the result
         const locations = await LocationModel.find();
 
         if (locations.length === 0) {
             return res.status(404).json({ error: 'No locations found' });
         }
+
+        const numberOfLocations = req.params.number || 1;
+
         const randomLocations = [];
 
         for (let i = 0; i < numberOfLocations; i++) {
@@ -62,6 +65,7 @@ const GET_LOCATION_RANDOM = async (req, res) => {
         return res.status(500).json({ error: 'Something wrong' });
     }
 };
+
 const GET_LOCATION_BY_ID = async (req, res) => {
     try {
         const locations = await LocationModel.findOne({ _id: req.params.id })
