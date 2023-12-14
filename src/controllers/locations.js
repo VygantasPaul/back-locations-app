@@ -49,7 +49,7 @@ const GET_LOCATION_RANDOM = async (req, res) => {
             return res.status(404).json({ error: 'No locations found' });
         }
 
-        const numberOfLocations = req.params.number || 1;
+        const numberOfLocations = locations.length;
 
         const randomLocations = [];
 
