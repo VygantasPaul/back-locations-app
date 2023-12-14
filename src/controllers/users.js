@@ -37,8 +37,6 @@ const LOGIN_USER = async (req, res) => {
     }
     const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET, { expiresIn: "6h" })
 
-    console.log(isPasswordMatch)
-
     return res.status(200).json({ response: "User was found", token, user: user, fullName: fullName })
 
 }
