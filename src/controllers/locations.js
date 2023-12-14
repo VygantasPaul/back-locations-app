@@ -90,7 +90,7 @@ const PUT_LOCATION = async (req, res) => {
         if (!location) {
             return res.status(404).json({ response: "Location not found" })
         }
-        return res.status(200).json({ location, response: "Location was updated" })
+        return res.status(200).json({ response: req.body, status: "Location was updated" })
     } catch (err) {
         console.log(err)
         return res.status(500).json({ response: "Something wrong" })
