@@ -50,13 +50,20 @@ const GET_LOCATION_RANDOM = async (req, res) => {
         }
 
         const numberOfLocations = locations.length;
+        console.log(numberOfLocations)
+
+        // Create a shallow copy of the locations array
+        const copyOfLocations = [...locations];
 
         const randomLocations = [];
 
         for (let i = 0; i < numberOfLocations; i++) {
-            const randomIndex = Math.floor(Math.random() * locations.length);
-            const randomLocation = locations[randomIndex];
+            const randomIndex = Math.floor(Math.random() * copyOfLocations.length);
+            const randomLocation = copyOfLocations[randomIndex];
             randomLocations.push(randomLocation);
+
+            // Remove the selected element to avoid duplicates
+            copyOfLocations.splice(randomIndex, 1);
         }
 
         return res.status(200).json({ locations: randomLocations });
@@ -65,6 +72,7 @@ const GET_LOCATION_RANDOM = async (req, res) => {
         return res.status(500).json({ error: 'Something wrong' });
     }
 };
+
 
 const GET_LOCATION_BY_ID = async (req, res) => {
     try {
